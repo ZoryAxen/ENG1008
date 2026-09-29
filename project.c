@@ -2,11 +2,11 @@
 #include <math.h>
 
 // 1. Prompt user input to enter number of digits (n)
-// 2. Prompt user to enter teh n-digit number
-// 3. Check input for binary sequence or for normal sequence
-// 4. If binary sequence, convert to decal numbers
-// 5. If normal sequence, modulus to separate number
-// 6. Print output
+// 2. Prompt user to enter the n-digit number
+// 3. Verify input
+// 4. Produce individual digits and display them
+// 5. Check for evidence of binary numbers
+// 6. Convert them to decimal format if true and display them
 
 int main(void)
 {
@@ -17,6 +17,8 @@ int main(void)
     scanf("%d", &digits_no);
     printf("Enter n-digit number: ");
     scanf("%d", &input_number);
+
+    // VERIFICATION TO BE IMPLEMENTED
 
     printf("Final Output: ");
     for (int i = 1, remainder = input_number, output_digit = 0; i <= digits_no; i++) 
