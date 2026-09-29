@@ -6,12 +6,12 @@ int main(void)
     float principal, interest, compound_interest;
     int years = 10;
 
-    puts("Ener your principal amount and interest rate to see your copmpound interest for 10 years. Restriction applies.");
-    puts("Enter 0 for both principal and interest rate to exit the program.");
+    printf("Ener your principal amount and interest rate to see your copmpound interest for 10 years. Restriction applies.\n");
+    printf("Enter 0 for both principal and interest rate to exit the program.\n");
 
     // Get user input for principal and interest rate
     // Verify user input
-    // Loop 1st comment until valid input or terminate program
+    // Loop until valid input or terminate program
     while (1) {
         printf("Enter principal amount ($):");
         scanf("%f", &principal);
@@ -39,11 +39,13 @@ int main(void)
             continue;
         }
 
-
-        // Calculate compound interest
-        compound_interest = principal * pow((1 + interest), years);
-
-        // Display the result
-        printf("After %d years, your investment will be worth: %.2f\n", years, compound_interest);
+        for (int i = 1; i <= years; i++)
+        {
+            // Calculate compound interest
+            compound_interest = principal * pow((1 + interest/100), i);
+            // Display each's year interest
+            printf("Year %d: %.2f \n", i, compound_interest);
+        }
+        printf("After %d years, your investment will be worth: $%.2f\n", years, compound_interest);
     }
 }
