@@ -13,14 +13,26 @@ int main(void)
     int  sum = 0, digits_no, input_number;
     bool is_binary = 1;
     
-    printf("Enter number of digits: ");
-    scanf("%d", &digits_no);
-    printf("Enter n-digit number: ");
-    scanf("%d", &input_number);
+    while (1)
+    {
+        printf("Enter number of digits: ");
+        scanf("%d", &digits_no);
+        printf("Enter n-digit number: ");
+        scanf("%d", &input_number); 
+        if (digits_no > 9 || digits_no < 0)
+        {
+            printf("Invalid input. Please enter a number between 0 and 9.\n");
+            continue;
+        } 
+        else if (digits_no == 0)
+        {
+            printf("Final output:\n");
+            return 0;
+        }
+        printf("Final output:");
+        break;
+    }
 
-    // VERIFICATION TO BE IMPLEMENTED
-
-    printf("Final Output: ");
     for (int i = 1, remainder = input_number, output_digit = 0; i <= digits_no; i++) 
     {
         output_digit = remainder / (int)pow(10, digits_no - i);
