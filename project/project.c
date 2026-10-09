@@ -68,20 +68,24 @@ int main(void)
     }
 }
 
+// Divide input by 10 until division operator returns 0
+// Increment count to represent length of number with each operation
 bool verify_numlength(int input, int numlength)
 {
     unsigned int counter = 0;
-    while (input > 0)
+    while (input != 0)
     {
         input = input / 10;
         counter++;
     }
     if (counter == numlength)
     {
+        printf("%u", counter);
         return 1;
     } 
     else 
     {
+        printf("%u", counter);
         return 0;
     }
 }
