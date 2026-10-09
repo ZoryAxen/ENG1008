@@ -8,6 +8,8 @@
 // 5. Check for evidence of binary numbers
 // 6. Convert them to decimal format if true and display them
 
+bool verify_numlength(int input, int numlength);
+
 int main(void)
 {
     int  sum = 0, digits_no, input_number;
@@ -17,8 +19,6 @@ int main(void)
     {
         printf("Enter number of digits: ");
         scanf("%d", &digits_no);
-        printf("Enter n-digit number: ");
-        scanf("%d", &input_number); 
         if (digits_no > 9 || digits_no < 0)
         {
             printf("Invalid input. Please enter a number between 0 and 9.\n");
@@ -29,8 +29,18 @@ int main(void)
             printf("Final output:\n");
             return 0;
         }
-        printf("Final output:");
-        break;
+        printf("Enter n-digit number: ");
+        scanf("%d", &input_number); 
+        if (verify_numlength(input_number, digits_no))
+        {
+            printf("Final output:");
+            break;
+        }
+        else
+        {
+            printf("Number of digits do not match\n");
+            continue;
+        }
     }
 
     for (int i = 1, remainder = input_number, output_digit = 0; i <= digits_no; i++) 
@@ -55,5 +65,23 @@ int main(void)
             remainder = remainder % (int)pow(10, digits_no - j);
         }
         printf("\nThe decimal equivalent is %d", sum);
+    }
+}
+
+bool verify_numlength(int input, int numlength)
+{
+    unsigned int counter = 0;
+    while (input > 0)
+    {
+        input = input / 10;
+        counter++;
+    }
+    if (counter == numlength)
+    {
+        return 1;
+    } 
+    else 
+    {
+        return 0;
     }
 }
