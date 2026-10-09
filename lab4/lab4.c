@@ -6,7 +6,7 @@ int main(void)
     float principal, interest, compound_interest;
     int years = 10;
 
-    printf("Enter your principal amount and interest rate to see your copmpound interest for 10 years. Restriction applies.\n");
+    printf("Ener your principal amount and interest rate to see your copmpound interest for 10 years. Restriction applies.\n");
     printf("Enter 0 for both principal and interest rate to exit the program.\n");
 
     // Get user input for principal and interest rate
