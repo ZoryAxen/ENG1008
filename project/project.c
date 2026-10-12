@@ -1,91 +1,141 @@
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 
-// 1. Prompt user input to enter number of digits (n)
-// 2. Prompt user to enter the n-digit number
-// 3. Verify input
-// 4. Produce individual digits and display them
-// 5. Check for evidence of binary numbers
-// 6. Convert them to decimal format if true and display them
-
-bool verify_numlength(int input, int numlength);
+int check_int(int *input);
+bool check_length(int input, int numlength);
 
 int main(void)
 {
-    int  sum = 0, digits_no, input_number;
-    bool is_binary = 1;
+    int  sum = 0, binary_multiplier = 1, digits_no, input_number, remainder;
+    bool is_binary = true;
     
-    while (1)
+    char sign[4];
+    int output_number[10];
+    
+    while (true)
     {
         printf("Enter number of digits: ");
-        scanf("%d", &digits_no);
-        if (digits_no > 9 || digits_no < 0)
-        {
-            printf("Invalid input. Please enter a number between 0 and 9.\n");
+        int status = check_int(&digits_no);
+        if (status == 0)
+        {   
+            printf("Invalid. Please enter number of digits (0-9).\n");
             continue;
-        } 
-        else if (digits_no == 0)
+        }
+        if (status == 1)
         {
-            printf("Final output:\n");
+            if (digits_no >= 0 && digits_no <=9)
+            {
+                break;
+            }
+            printf("Number of digits out of range (0-9).\n");
+        }
+        if (status == -1)
+        {
+            printf("EOF detected. Terminating program.\n");
             return 0;
         }
+    }
+    if (digits_no == 0)
+    {
+        printf("0 entered. Terminating program.\n");
+        return 0;
+    }
+    while (true)
+    {
         printf("Enter n-digit number: ");
-        scanf("%d", &input_number); 
-        if (verify_numlength(input_number, digits_no))
+        int status = check_int(&input_number);
+        if (status == 0)
         {
-            printf("Final output:");
-            break;
-        }
-        else
-        {
-            printf("Number of digits do not match\n");
+            printf("Invalid. Please enter an integer.\n");
             continue;
         }
-    }
-
-    for (int i = 1, remainder = input_number, output_digit = 0; i <= digits_no; i++) 
+        if (status == 1)
+        {
+            if (check_length(input_number, digits_no))
+            {
+                break;
+            }
+            printf("Number does not match specified length [%d]\n", digits_no);
+        }
+        if (status == -1)
+        {
+            printf("EOF detected. Terminating program.\n");
+            return 0;
+        }
+    }   
+    if (input_number >= 0)
     {
-        output_digit = remainder / (int)pow(10, digits_no - i);
-        remainder = remainder % (int)pow(10, digits_no - i);
-        printf("%d ",  output_digit);
+        strcpy(sign, "[+]");
+    }
+    if (input_number < 0)
+    {
+        strcpy(sign, "[-]");
+        input_number *= -1;
+    }
+    remainder = input_number;
+    for (int i = digits_no - 1; i >= 0; i--)
+    {
+        int output_digit = remainder % 10;
+        output_number[i] = output_digit;
+        sum += output_digit * binary_multiplier;
+        remainder = remainder / 10;
         if (output_digit != 0 && output_digit != 1)
         {
-            is_binary = 0;
+            is_binary = false;
         }
+        binary_multiplier *= 2;
     }
-    if (is_binary) 
+    printf("Final output: %s", sign);
+    for (int i = 0; i < digits_no; i++)
     {
-        for (int j = 1, remainder = input_number; j <= digits_no; j++)
-        
-        {
-            // Increment sum by 2 to the power of digits no - 1 * number divided by 10 to the power of digits no -1
-            // Retrieve the remaining numbers for the next loop
-            // Repeat loop until digits no - 1 == 0 (2^0)
-            sum += (remainder / (int)pow(10, digits_no - j)) * (int)pow(2, digits_no - j);
-            remainder = remainder % (int)pow(10, digits_no - j);
-        }
-        printf("\nThe decimal equivalent is %d", sum);
+        printf("%2d", output_number[i]);
+    }
+    printf("\n");
+    if (is_binary)
+    {
+        printf("The decimal equivalent is %s%d", strcmp(sign, "[+]") ? "-" : "", sum);
     }
 }
 
-// Divide input by 10 until division operator returns 0
-// Increment count to represent length of number with each operation
-bool verify_numlength(int input, int numlength)
+
+int check_int(int *input)
+{
+    int scan_status = scanf("%d", input);
+    if (scan_status == EOF)
+    {
+        return -1;
+    }
+    if (scan_status == 0)
+    {
+        while ((getchar()) != '\n');
+        return 0;
+    }
+    return 1;
+}
+
+bool check_length(int input, int numlength)
 {
     unsigned int counter = 0;
-    while (input != 0)
+    if (input == 0)
     {
-        input = input / 10;
         counter++;
     }
+    else 
+    {
+      while (input != 0)
+        {
+            input = input / 10;
+            counter++;
+        }  
+    }  
     if (counter == numlength)
     {
-        printf("%u", counter);
-        return 1;
+        return true;
     } 
     else 
     {
-        printf("%u", counter);
-        return 0;
+        return false;
     }
 }
