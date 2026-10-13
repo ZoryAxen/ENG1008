@@ -32,7 +32,7 @@ bool check_length(int input, int numlength)
             counter++;
         }  
     }  
-    return (counter == numlength);
+    return (counter <= numlength);
 }
 
 int get_digits_no(int *digits_no)

@@ -15,8 +15,12 @@ void verify_digit_length_logic(void)
     printf("Input number = 654321 || Length = 6 [TRUE] ---- PASSED\n");
     assert(check_length(0, 1) == true);     
     printf("Input number = 0 || Length = 1 ---- [TRUE] PASSED\n");  
-    assert(check_length(101, 4) == false);      
-    printf("Input number = 101 || Length = 4 ---- [FALSE] PASSED\n");   
+    assert(check_length(101, 4) == true);      
+    printf("Input number = 101 || Length = 4 ---- [TRUE] PASSED\n");   
+    assert(check_length(0101, 4) == true);      
+    printf("Input number = 0101 || Length = 4 ---- [TRUE] PASSED\n");   
+    assert(check_length(10001, 4) == false);      
+    printf("Input number = 10001 || Length = 4 ---- [FALSE] PASSED\n"); 
     printf("PASSED ALL TESTS check_length()\n\n");
 }
 
