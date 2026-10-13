@@ -3,13 +3,16 @@
 #include <stdbool.h>
 #include <string.h>
 
+// BEGINNING OF PROTOTYPES
 int check_int(int *input);
 bool check_length(int input, int numlength);
 int get_digits_no(int *digits_no);
 int get_input_no(int *input_no, int digits_no);
 void convert_binary(int input_no, int digits_no, char sign[], int output_no[], int *sum, bool *is_binary);
 void print_results( char sign[], int digits_no, int output_no[], bool is_binary, int sum);
+// END OF PROTOTYPES
 
+// ENTRY POINT MAIN()
 int main(void)
 {
     int  sum = 0, digits_no, input_no;
@@ -41,6 +44,7 @@ int main(void)
     // Print results
     print_results(sign, digits_no, output_no, is_binary, sum);
 }
+// END OF MAIN()
 
 // BEGINNING OF HELPER FUNCTIONS
 int check_int(int *input)
@@ -178,3 +182,4 @@ void print_results(char sign[], int digits_no, int output_no[], bool is_binary, 
         printf("The decimal equivalent is %s%d\n", strcmp(sign, "[+]") ? "-" : "", sum);
     }
 }
+// END OF HELPER FUNCTIONS
