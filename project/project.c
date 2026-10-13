@@ -90,7 +90,7 @@ int main(void)
     printf("Final output: %s", sign);
     for (int i = 0; i < digits_no; i++)
     {
-        printf("%2d", output_number[i]);
+        printf("%6d", output_number[i]);
     }
     printf("\n");
     if (is_binary)
