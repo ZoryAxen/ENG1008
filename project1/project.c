@@ -130,7 +130,7 @@ int get_input_no(int *input_no, int digits_no)
             {
                 return 1;
             }
-            printf("Number does not match specified length [%d]\n", digits_no);
+            printf("Number exceeds specified length [%d]\n", digits_no);
         }
         if (status == -1)
         {
