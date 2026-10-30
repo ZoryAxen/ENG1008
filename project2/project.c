@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 void populate_readings(float readings[], FILE *fpi);
 
@@ -13,7 +14,7 @@ float monthhr();
 int main(void)
 {
     // Reading array, intialise to random capacity
-    float readings[100];
+    float *readings = malloc(sizeof(float) * 100);
 
     // Month arrays store day, 
     float april[31][3];
@@ -21,14 +22,24 @@ int main(void)
     float june[31][3];
 
     FILE *fpi;
-    fpi = open("proj2.txt", "r");
+    fpi = fopen("proj2.txt", "r");
 
     populate_readings(readings, fpi);
 }
 
 void populate_readings(float readings[], FILE *fpi)
 {
-
+    int count = 0;
+    int capacity = 100;
+    while(scanf("f", readings) == 1)
+    {
+        count++;
+        if (count == capacity)
+        {
+            capacity *= 2;
+            realloc(readings, sizeof(float) * capacity);
+        }
+    }
 }
 
 void hourave()
