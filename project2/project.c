@@ -25,19 +25,28 @@ int main(void)
     fpi = fopen("proj2.txt", "r");
 
     populate_readings(readings, fpi);
+
 }
 
 void populate_readings(float readings[], FILE *fpi)
 {
     int count = 0;
     int capacity = 100;
-    while(scanf("f", readings) == 1)
+    float value;
+    float *temp;
+
+    while(fscanf(fpi, "%f", &value) == 1)
     {
+        readings[count] = value;
         count++;
         if (count == capacity)
         {
-            capacity *= 2;
-            realloc(readings, sizeof(float) * capacity);
+            capacity += 100;
+            temp = realloc(readings, sizeof(float) * capacity);
+            if (temp != NULL)
+            {
+                readings = temp;
+            }
         }
     }
 }
