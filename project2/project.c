@@ -4,7 +4,7 @@
 
 void populate_readings(float readings[], FILE *fpi);
 
-void hourave();
+void hourave(float readings[], float month[][]);
 
 void dailymsd();
 
@@ -13,13 +13,13 @@ float monthhr();
 
 int main(void)
 {
-    // Reading array, intialise to random capacity
+    // Reading array, intialise to capacity of 100 float value
     float *readings = malloc(sizeof(float) * 100);
 
-    // Month arrays store day, 
-    float april[31][3];
-    float may[31][3];
-    float june[31][3];
+    // Month arrays store
+    float april[30][3];
+    float may[30][3];
+    float june[30][3];
 
     FILE *fpi;
     fpi = fopen("proj2.txt", "r");
@@ -51,8 +51,12 @@ void populate_readings(float readings[], FILE *fpi)
     }
 }
 
-void hourave()
+void hourave(float readings[], float month[][])
 {
+    for (int i = 0; i < 30; i++)
+    {
+        
+    }
 
 }
 
