@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <math.h>
-#include <stdlib.h>
 
 void populate_readings(float readings[], FILE *fpi);
 
@@ -23,6 +22,7 @@ int main(void)
     float may[30][16];
     float june[30][16];
 
+    // FILE IO
     FILE *fpi;
     fpi = fopen("proj2.txt", "r");
 
@@ -31,10 +31,12 @@ int main(void)
 
     // Function calls
     hourave(readings, april, 0);
-    hourave(readings, may, 1680);
-    hourave(readings, june, 3360);
     dailymsd(readings, april, 0);
+
+    hourave(readings, may, 1680);
     dailymsd(readings, may, 1680);
+
+    hourave(readings, june, 3360);
     dailymsd(readings, june, 3360);
 
     // IO
