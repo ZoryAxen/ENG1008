@@ -10,6 +10,8 @@ void dailymsd(float readings[], float month[][16], int offset);
 
 float monthhr(float month[][16], int hour);
 
+void print_month_output(float month[][16], char* month_name);
+
 
 int main(void)
 {
@@ -36,37 +38,9 @@ int main(void)
     dailymsd(readings, june, 3360);
 
     // IO
-    for (int month = 0; month < 3; month++)
-    {
-        printf("%s Temperature\n", month == 0 ? "April" : (month == 1 ? "May" : "June"));
-        for (int day = 0; day < 30; day++)
-        {
-            printf("Day %d: \n", day);
-            if (month == 0)
-            {
-                for (int hour = 0; hour < 14; hour++)
-                {
-                    printf("Temp: %-6.2f", april[day][hour]);
-                }
-            } else if (month == 1)
-            {
-                for (int hour = 0; hour < 14; hour++)
-                {
-                    printf("Temp: %-6.2f", may[day][hour]);
-                }
-            } else 
-            {
-                for (int hour = 0; hour < 14; hour++)
-                {
-                    printf("Temp: %-6.2f", june[day][hour]);
-                }
-            }
-            printf("Daily mean: %-6.2f  Daily sd: %-6.2f", april[day][14], april[day][15]);
-            printf("\n");
-        }
-        printf("%-6.2f", monthhr(april, 1));
-        printf("\n");
-    }
+    print_month_output(april, "APRIL");
+    print_month_output(may, "MAY");
+    print_month_output(june, "JUNE");
 }
 
 void populate_readings(float readings[], FILE *fpi)
@@ -140,4 +114,23 @@ float monthhr(float month[][16], int hour)
         monthhr_sum += month[day][hour];
     }
     return monthhr_sum / 30.0f;
+}
+
+void print_month_output(float month[][16], char* month_name)
+{
+    printf("\n%s REPORT\n", month_name);
+    for (int day = 0; day < 30; day++)
+    {
+        printf("\nDay %02d Hourly Averages:\n", day + 1);
+        for (int hour = 0; hour < 14; hour++)
+        {
+            printf("%-6.2f", month[day][hour]);
+        }
+        printf("\nMean: %.2f   SD: %.2f\n\n", month[day][14], month[day][15]);
+    }
+    printf("\nMONTHLY AVERAGE TEMPERATURE\n");
+    for (int hour = 0; hour < 14; hour++)
+    {
+        printf("Temperaure (%02d:00): %.2f\n", hour + 7, monthhr(month, hour));
+    }
 }
