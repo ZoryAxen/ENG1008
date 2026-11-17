@@ -99,7 +99,7 @@ void dailymsd(float readings[], float month[][16], int offset)
         float squared_diff_sum = 0.0f;
         for (int i = 0; i < 56; i++)
         {
-            float diff = readings[offset - (i + 1)];
+            float diff = readings[offset - (i + 1)] - mean;
             squared_diff_sum += diff * diff;
         }
 
